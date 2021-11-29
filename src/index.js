@@ -1,11 +1,13 @@
 const defaultColors = {
-  keyColor: 'dimgray',
-  numberColor: 'lightskyblue',
-  stringColor: 'lightcoral',
-  trueColor: 'lightseagreen',
-  falseColor: '#f66578',
-  nullColor: 'cornflowerblue'
-}
+  keyColor: '#9cdcfe',
+  nullColor: '#569cd6',
+  trueColor: '#569cd6',
+  falseColor: '#569cd6',
+  numberColor: '#b5cea8',
+  stringColor: '#ce9178',
+  bracketsColor: '#d4d4d4',
+  backgroundColor: '#1e1e1e'
+};
 
 const entityMap = {
   '&': '&amp;',
@@ -17,29 +19,35 @@ const entityMap = {
   '=': '&#x3D;'
 };
 
-function escapeHtml (html) {
+function escapeHtml(html) {
   return String(html).replace(/[&<>"'`=]/g, function (s) {
-      return entityMap[s];
+    return entityMap[s];
   });
 }
 
-export default function (json, colorOptions = {}) {
-  const valueType = typeof json
+export default function formatHighlight(
+  json,
+  { tagPre = false, wordWrap = false, colors } = {}
+) {
+  const valueType = typeof json;
   if (valueType !== 'string') {
-    json = JSON.stringify(json, null, 2) || valueType
+    json = JSON.stringify(json, null, 2) || valueType;
   }
-  let colors = Object.assign({}, defaultColors, colorOptions)
-  json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>')
-  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+]?\d+)?)/g, (match) => {
-    let color = colors.numberColor
-    let style = ''
+  colors = { ...defaultColors, ...colors }
+  json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+  const formatJson = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+]?\d+)?)/g, (match) => {
+    let color = colors.numberColor;
+    let cls = '';
+    let style = '';
     if (/^"/.test(match)) {
       if (/:$/.test(match)) {
-        color = colors.keyColor
+        cls = 'key';
+        color = colors.keyColor;
       } else {
+        cls = '';
         color = colors.stringColor;
         match = '"' + escapeHtml(match.substr(1, match.length - 2)) + '"';
-        style = 'word-wrap:break-word;white-space:pre-wrap;';
+        style = wordWrap ? 'word-wrap:break-word;white-space:pre-wrap;' : ''
       }
     } else {
       color = /true/.test(match)
@@ -50,6 +58,17 @@ export default function (json, colorOptions = {}) {
             ? colors.nullColor
             : color
     }
-    return `<span style="${style}color:${color}">${match}</span>`
+
+    if (cls === 'key') {
+      return `<span style="${style}color:${color}">${match.slice(0, -1)}</span>:`;
+    } else {
+      return `<span style="${style}color:${color}">${match}</span>`;
+    }
   })
+
+  if (tagPre) {
+    return `<pre style="color:${colors.bracketsColor};background:${colors.backgroundColor}${!wordWrap ? ';overflow:auto' : ''}">${formatJson}</pre>`;
+  } else {
+    return formatJson;
+  }
 }
