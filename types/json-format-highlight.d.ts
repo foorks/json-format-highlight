@@ -1,4 +1,4 @@
-interface Colors {
+export interface Colors {
   keyColor: string
   nullColor: string
   trueColor: string
