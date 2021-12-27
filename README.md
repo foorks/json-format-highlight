@@ -8,9 +8,9 @@
 
 ## Demo
 
-You can play with `@crashmax/json-format-highlight` on [foorks.github.io](https://foorks.github.io/json-format-highlight/example/dist/) or [codesandbox.io](https://codesandbox.io/s/json-format-highlight-fbrt8)
+You can play with `@crashmax/json-format-highlight` on [foorks.github.io/json-format-highlight](https://foorks.github.io/json-format-highlight/) or [codesandbox.io](https://codesandbox.io/s/crashmax-json-format-highlight-dr6ti)
 
-[![Edit @crashmax/json-format-highlight](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/json-format-highlight-fbrt8)
+[![Edit @crashmax/json-format-highlight](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/crashmax-json-format-highlight-dr6ti)
 
 ## Features
 
@@ -44,7 +44,7 @@ import formatHighlight from '@crashmax/json-format-highlight'
 const json = {
   ok: true,
   status: 200,
-  data: 'hello world'
+  message: 'hello world'
 }
 
 formatHighlight(json, colorOptions)
