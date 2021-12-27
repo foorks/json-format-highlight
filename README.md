@@ -2,7 +2,11 @@
 
 [![NPM version](https://img.shields.io/npm/v/@crashmax/json-format-highlight.svg?style=flat)](https://npmjs.com/package/@crashmax/json-format-highlight)
 [![NPM downloads](https://img.shields.io/npm/dm/@crashmax/json-format-highlight.svg?style=flat)](https://npmjs.com/package/@crashmax/json-format-highlight)
+<<<<<<< HEAD
 [![GitHub Workflow](https://img.shields.io/github/workflow/status/foorks/json-format-highlight/github-pages)](https://github.com/foorks/@crashmax/json-format-highlight/actions)
+=======
+[![NPM downloads](https://img.shields.io/github/workflow/status/foorks/json-format-highlight/github-pages)](https://github.com/foorks/@crashmax/json-format-highlight/actions)
+>>>>>>> b494c724d3ae4c8957fc88f0f567499e411299b8
 
 > ✨ Format json and highlight it as well.
 
