@@ -47,7 +47,7 @@ const json = {
   message: 'hello world'
 }
 
-formatHighlight(json, colorOptions)
+formatHighlight(json, /** options */)
 ```
 
 ## Options
