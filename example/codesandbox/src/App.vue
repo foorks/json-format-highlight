@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import formatHighlight from 'json-format-highlight'
+  import formatHighlight from '@crashmax/json-format-highlight'
 
   export default {
     data() {
